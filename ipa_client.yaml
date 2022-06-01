@@ -3,10 +3,18 @@
    hosts: worker
    become: true
    tasks: 
-    - name: Ansible apt-get to get install freeipa-client chrony
+    - name: Ansible apt-get to get install freeipa-client chrony nfs-common
       apt:
         name: 
           - freeipa-client
           - chrony
+          - nfs-common
         state: present
         force_apt_get: yes
+
+    - name: Add the below lines
+      blockinfile:
+        path: /etc/fstab
+        state: present
+        block: |
+          10.10.10.100:/storage /storage nfs auto,timeo=14,intr 0 0

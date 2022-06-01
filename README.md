@@ -32,9 +32,28 @@ Install slurm.
 ansible-playbook -u user -K slurm.yaml -vv
 ```
 
-2. An example to install conda environment in workers only.
+2. An example to install conda environment in workers only. (Optional)
 ```
 ansible-playbook --user=user conda.yaml -vv
 ```
 
+3. Install shared storage
+   1. master side
+   ```
+   # ssh to master
+   sudo apt install nfs-kernel-server -y
+
+   # we need to add rules for the shared location. This is done with:
+   sudo vim /etc/exports
+
+   # Then adding the line:
+   /data *(rw,sync,no_root_squash)
+
+   sudo systemctl start nfs-kernel-server.service
+   sudo ufw allow from any to any port nfs
+   ```
+   2. master side
+   ```
+   #auto mount it in /etc/fstab. 
+   ```
 # Management Use

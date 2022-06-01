@@ -1,0 +1,6 @@
+- name: Unconditionally reboot the machine with all defaults
+  hosts: crane
+  become: yes
+  tasks:
+    - name: Just reboot
+      reboot:
