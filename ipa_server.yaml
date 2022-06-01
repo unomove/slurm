@@ -1,0 +1,51 @@
+---
+version: '3.7'
+services:
+  freeipa:
+    image: freeipa/freeipa-server:centos-8
+    restart: unless-stopped
+    hostname: crane3.d2.comp.nus.edu.sg
+    environment:
+      IPA_SERVER_HOSTNAME: crane3.d2.comp.nus.edu.sg
+      TZ: "Asia/Singapore"
+    tty: true
+    stdin_open: true
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - freeipavol:/data
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+      - net.ipv6.conf.lo.disable_ipv6=0
+    security_opt:
+      - "seccomp:unconfined"
+    command:
+      - -U
+      - --domain=d2.comp.nus.edu.sg
+      - --realm=d2.comp.nus.edu.sg
+      - --http-pin=adacompipa
+      - --dirsrv-pin=adacompipa
+      - --ds-password=adacompipa
+      - --admin-password=adacompipa
+      - --no-host-dns
+      - --unattended
+    ports:
+
+      - "80:80"
+      - "443:443"
+      - "389:389"
+      - "636:636"
+      - "88:88"
+      - "464:464"
+      - "88:88/udp"
+      - "464:464/udp"
+      - "123:123/udp"
+      - "7389:7389"
+      - "9443:9443"
+      - "9444:9444"
+      - "9445:9445"
+
+volumes:
+  freeipavol:

@@ -12,5 +12,9 @@ Note: choose centos 8 stream for FreeIPA [docker](https://computingforgeeks.com/
 sudo docker build -t freeipa-server -f Dockerfile.centos-8-stream .
 ```
 
+### FAQ
+1. DNS zone XXX already exists in DNS and is handled by server(s).
+
+    This case can be handled by specifying ipa-server-install --allow-zone-overlap option.
 
 # Management Use
