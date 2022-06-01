@@ -1,0 +1,7 @@
+---
+ - name: Ansible apt module examples
+   hosts: worker
+   become: true
+   tasks: 
+    - name: copy munge config files task
+      shell: cp /data/munge.key /etc/munge/munge.key

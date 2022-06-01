@@ -9,6 +9,9 @@
           - freeipa-client
           - chrony
           - nfs-common
+          - libmunge-dev 
+          - libmunge2 
+          - munge
         state: present
         force_apt_get: yes
 
@@ -17,4 +20,4 @@
         path: /etc/fstab
         state: present
         block: |
-          10.10.10.100:/storage /storage nfs auto,timeo=14,intr 0 0
+          10.10.10.100:/data /data nfs auto,timeo=14,intr 0 0

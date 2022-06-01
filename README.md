@@ -38,7 +38,7 @@ ansible-playbook --user=user conda.yaml -vv
 ```
 
 3. Install shared storage
-   1. master side
+   master side
    ```
    # ssh to master
    sudo apt install nfs-kernel-server -y
@@ -52,8 +52,24 @@ ansible-playbook --user=user conda.yaml -vv
    sudo systemctl start nfs-kernel-server.service
    sudo ufw allow from any to any port nfs
    ```
-   2. master side
+4. Ready to install slurm now.
+   1. Passwordless SSH from master to all workers.
    ```
-   #auto mount it in /etc/fstab. 
+   ssh-keygen
+   ssh-copy-id user@crane0.d2.comp.nus.edu.sg # etc...
    ```
+   2. Install munge on the master:
+   ```
+   sudo apt-get install libmunge-dev libmunge2 munge -y
+   sudo systemctl enable munge
+   sudo systemctl start munge
+   ```
+   Test munge if you like: munge -n | unmunge | grep STATUS
+   ```
+   sudo cp /etc/munge/munge.key /data/
+   sudo chown munge /data/munge.key
+   sudo chmod 400 /data/munge.key
+   ```
+
+
 # Management Use
