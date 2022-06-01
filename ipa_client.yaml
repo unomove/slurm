@@ -1,0 +1,12 @@
+---
+ - name: Ansible apt module examples
+   hosts: worker
+   become: true
+   tasks: 
+    - name: Ansible apt-get to get install freeipa-client chrony
+      apt:
+        name: 
+          - freeipa-client
+          - chrony
+        state: present
+        force_apt_get: yes

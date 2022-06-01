@@ -5,16 +5,36 @@
 ansible-playbook -u user -K upgrade.yaml -vv
 ```
 
-Install freeIPA server in [master](https://computingforgeeks.com/install-and-configure-freeipa-server-on-ubuntu/) and freeIPA client in [workers]().
-
-Note: choose centos 8 stream for FreeIPA [docker](https://computingforgeeks.com/run-freeipa-server-in-docker-podman-containers/) if system is newer than ubuntu 20.04.
+Install IPA Server and client for User and account management.
 ```
-sudo docker build -t freeipa-server -f Dockerfile.centos-8-stream .
+# ssh to the master machine
+docker volume create freeipavol
+docker-compose up -d # start the freeipa server
 ```
 
-### FAQ
-1. DNS zone XXX already exists in DNS and is handled by server(s).
+Install IPA client.
+```
+ansible-playbook -u user -K ipa_client.yaml -vv
 
-    This case can be handled by specifying ipa-server-install --allow-zone-overlap option.
+# set hostname accordingly.
+# for example, this needs to ssh to the server once on the server side.
+hostnamectl set-hostname crane0.d2.comp.nus.edu.sg 
+sudo ipa-client-install --hostname=`hostname -f` \
+--mkhomedir \
+--server=crane3.d2.comp.nus.edu.sg \
+--domain d2.comp.nus.edu.sg \
+--realm D2.COMP.NUS.EDU.SG
+```
+
+Install slurm.
+1. Adduser (only need once.)
+```
+ansible-playbook -u user -K slurm.yaml -vv
+```
+
+2. An example to install conda environment in workers only.
+```
+ansible-playbook --user=user conda.yaml -vv
+```
 
 # Management Use

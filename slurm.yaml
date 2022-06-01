@@ -1,0 +1,9 @@
+---
+ - name: Ansible apt module examples
+   hosts: crane
+   become: true
+   tasks: 
+    - name: adduser for slurm
+      command: adduser -u 1111 munge --disabled-password --gecos ""
+    - name: adduser for slurm
+      command: adduser -u 1121 slurm --disabled-password --gecos ""

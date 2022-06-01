@@ -1,0 +1,27 @@
+---
+- name: Setup miniconda3
+  hosts: worker
+  become: no
+  vars:
+    home: "/home/user"
+  # you can run ONLY this play by doing:
+  # ansible-playbook --user=user conda.yaml -vv --tags "miniconda3"
+  tags: miniconda3
+
+  tasks:
+    # this will only download if not already there
+    - name: Download miniconda3 installer
+      get_url:
+        url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+        dest: "/tmp/Miniconda3-latest-Linux-x86_64.sh"
+
+    # this will only run if miniconda3 is not already there yet (creates: ...)
+    - name: Install miniconda3
+      command: "/bin/bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b"
+      args:
+        creates: "{{ home }}/miniconda3"
+
+    - name: Add conda config to .bashrc
+      lineinfile:
+        path: "{{ home }}/.bashrc"
+        line: ". ~/miniconda3/etc/profile.d/conda.sh"

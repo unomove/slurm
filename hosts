@@ -4,7 +4,7 @@ crane1.d2.comp.nus.edu.sg
 crane2.d2.comp.nus.edu.sg
 crane3.d2.comp.nus.edu.sg
 
-[workers]
+[worker]
 crane0.d2.comp.nus.edu.sg
 crane1.d2.comp.nus.edu.sg
 crane2.d2.comp.nus.edu.sg
