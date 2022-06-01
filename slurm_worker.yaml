@@ -1,0 +1,14 @@
+---
+ - name: Ansible apt module examples
+   hosts: worker
+   become: true
+   tasks: 
+    - name: start slurm worker
+      shell: cd /data && dpkg -i slurm-21.08.8_1.0_amd64.deb
+    - name: copy slurm config files task
+      shell: cp /data/ubuntu-slurm/slurmd.service /etc/systemd/system/
+    - name: Enable service slurm 
+      ansible.builtin.systemd:
+        name: slurmd
+        state: started
+        enabled: yes

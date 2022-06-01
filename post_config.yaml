@@ -5,3 +5,9 @@
    tasks: 
     - name: copy munge config files task
       shell: cp /data/munge.key /etc/munge/munge.key
+
+    - name: Enable service munge 
+      ansible.builtin.systemd:
+        name: munge
+        state: started
+        enabled: yes
