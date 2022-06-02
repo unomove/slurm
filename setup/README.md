@@ -155,8 +155,17 @@ ansible-playbook --user=user conda.yaml -vv
    ```
    Finally, we need to copy .conf files on all machines.
 
-   9. Final sample conf.
+   10. Finally copy configs to each machine..
    ```
-   # slurm.conf
-   # gres.conf
+   sudo cp /data/ubuntu-slurm/cgroup* /etc/slurm/
+   sudo cp /data/slurm.conf /etc/slurm/
+   sudo cp /data/gres.conf /etc/slurm/
+
+   # reload slurm
+   ansible-playbook -u user -K post_config.yaml -vv
+   ```
+
+   11. Create cluster
+   ```
+   sudo sacctmgr add cluster adacomp-cluster
    ```

@@ -11,3 +11,16 @@
         name: munge
         state: started
         enabled: yes
+
+    - name: Creates slurm running directory
+      file:
+        path: /var/spool/slurm/d
+        state: directory
+        owner: slurm
+        group: slurm
+        mode: 0775
+
+    - name: Restart service slurm 
+      ansible.builtin.systemd:
+        name: slurmd
+        state: restarted
