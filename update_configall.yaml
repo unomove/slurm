@@ -7,6 +7,12 @@
       shell: sudo cp /data/slurm.conf /etc/slurm/
     - name: copy slurm config files task
       shell: sudo cp /data/gres.conf /etc/slurm/
+    - name: allow slurmctld port
+      shell: sudo ufw allow 6817
+    - name: allow slurmd port
+      shell: sudo ufw allow 6818
+    - name: allow slurmd port
+      shell: sudo ufw reload
 
  - name: Ansible update slurm conf and gres  conf
    hosts: crane
