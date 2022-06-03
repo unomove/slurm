@@ -9,7 +9,7 @@
       shell: sudo cp /data/gres.conf /etc/slurm/
 
  - name: Ansible update slurm conf and gres  conf
-   hosts: worker
+   hosts: crane
    become: true
    tasks: 
     - name: Restart service slurm 
