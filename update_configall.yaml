@@ -1,6 +1,6 @@
 ---
  - name: Ansible update slurm conf and gres  conf
-   hosts: worker
+   hosts: crane
    become: true
    tasks: 
     - name: copy slurm config files task
@@ -8,6 +8,10 @@
     - name: copy slurm config files task
       shell: sudo cp /data/gres.conf /etc/slurm/
 
+ - name: Ansible update slurm conf and gres  conf
+   hosts: worker
+   become: true
+   tasks: 
     - name: Restart service slurm 
       ansible.builtin.systemd:
         name: slurmd

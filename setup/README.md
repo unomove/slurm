@@ -162,6 +162,7 @@ ansible-playbook --user=user conda.yaml -vv
    sudo cp /data/gres.conf /etc/slurm/
 
    # reload slurm
+   ansible-playbook -u user -K update_configall.yaml -vv
    ansible-playbook -u user -K post_config.yaml -vv
    ```
 
