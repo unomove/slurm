@@ -9,18 +9,18 @@ you can maintain the users with Web UI. [link](https://crane3.d2.comp.nus.edu.sg
 The user editing UI:
 ![image](./img/user.png)
 
-Any user created/deleted through freeipa will synchronized across all the machines. But here, only recommend to use master machine(crane3) to handle all your jobs via slurm.
+Any user created/deleted through freeipa will be synchronized across all the machines. But here, I only recommend to use master machine(crane3) to handle all your jobs via slurm.
 
 ## For normal user
 1. login crane3 using your id.
-2. 
-3. submit your programe with slurm. You need to learn to use slurm system. Here is the cheat sheet. A quickstart [guide](https://slurm.schedmd.com/quickstart.html).
+   
+2. submit your programe with slurm. You need to learn to use slurm system. Here is the cheat sheet. A quickstart [guide](https://slurm.schedmd.com/quickstart.html).
 ![image](./img/slurm_summary-1.png)
 ![image](./img/slurm_summary-2.png)
 
-4. More principled [guide](https://researchcomputing.princeton.edu/support/knowledge-base/slurm).
+3. More principled [guide](https://researchcomputing.princeton.edu/support/knowledge-base/slurm).
 
-3. Check stats:
+4. Check stats:
 ```
 sinfo
 # sample output
@@ -29,7 +29,7 @@ debug*       up   infinite      1    mix storage
 debug*       up   infinite      3   idle crane[0-2]
 ```
 
-4. Check GPU stats. Here, recommend one tool: [slurm_gpustat](https://github.com/albanie/slurm_gpustat)
+5. Check GPU stats. Here, recommend one tool: [slurm_gpustat](https://github.com/albanie/slurm_gpustat)
 ```
 slurm_gpustat
 # sample output
