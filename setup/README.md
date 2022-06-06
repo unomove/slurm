@@ -104,17 +104,17 @@ ansible-playbook --user=user conda.yaml -vv
    5. Install slurm
    ```
    cd /data
-   wget https://download.schedmd.com/slurm/slurm-21.08.8.tar.bz2
-   tar xvf slurm-21.08.8.tar.bz2
-   cd slurm-21.08.8
-   ./configure --prefix=/tmp/slurm-build --sysconfdir=/etc/slurm --enable-pam --with-pam_dir=/lib/x86_64-linux-gnu/security/ --without-shared-libslurm
+   wget https://download.schedmd.com/slurm/slurm-21.08.8-2.tar.bz2
+   tar xvf slurm-21.08.8-2.tar.bz2
+   cd slurm-21.08.8-2
+   ./configure --prefix=/data/slurm-build --sysconfdir=/etc/slurm --enable-pam --with-pam_dir=/lib/x86_64-linux-gnu/security/ --without-shared-libslurm
    make -j $(nproc)
    make -j $(nproc) contrib
    make install
    cd ..
 
-   sudo fpm -s dir -t deb -v 1.0 -n slurm-21.08.8 --prefix=/usr -C /tmp/slurm-build .
-   sudo dpkg -i slurm-21.08.8_1.0_amd64.deb
+   sudo fpm -s dir -t deb -v 1.0 -n slurm-21.08.8-2 --prefix=/usr -C /data/slurm-build .
+   sudo dpkg -i slurm-21.08.8-2_1.0_amd64.deb
    ```
    6. Configure slurm
    ```
@@ -143,6 +143,9 @@ ansible-playbook --user=user conda.yaml -vv
    8. Configure slurm
    ```
    # in master node
+   # need open ports for srun
+   sudo ufw allow 30000:60000/tcp
+   sudo ufw allow 30000:60000/udp
    cp /data/ubuntu-slurm/slurm.conf /data/slurm.conf
    sudo slurmd -C # print out the machine specs.
    # sample: NodeName=storage CPUs=40 Boards=1 SocketsPerBoard=2 CoresPerSocket=10 ThreadsPerCore=2 RealMemory=64027

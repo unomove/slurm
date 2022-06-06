@@ -1,6 +1,6 @@
 ---
  - name: Ansible apt module examples
-   hosts: worker
+   hosts: crane
    become: true
    tasks: 
     - name: copy munge config files task
